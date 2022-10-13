@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Data.SqlTypes;
 using VendingMachine;
+
 
 namespace VendingMachine
 {
@@ -10,45 +12,50 @@ namespace VendingMachine
         private static void Main(string[] args)
         {
 
-
+            VendingMachine vm = new VendingMachine();
             
             while (true)
             {
                 
-                    int menu;
+               int menu;
                 Console.Write("\nHere are the options :\n");
                 Console.Write("1-Purchase.\n2-ShowAll.\n3-InsertMoney.\n4-EndTransaction.\n5-Exit.\n");
                 Console.Write("\nInput your choice :");
-                
-                userData user1 = new userData();
-                user1.moneyPool = 0;
-           // inAndOut validator = new inAndOut();
-           vendingmachine execute = new vendingmachine();
+
+
+                int money;
+
+
+           VendingMachine execute = new VendingMachine();
 
                 //variables
 
                 //run loop
                 try
-                {
+                {   
+
                     menu = Convert.ToInt32(Console.ReadLine());
                     // Console.WriteLine($"You currently have {user1.moneyPool}kr.\n\nWhich of the following would you like to do?\n1. Purchace an item from the vending machine\n2. Look at the items in the vending machine\n3. Insert money\n4. Leave the machine\n\n(Enter the number corresponding with the task you wish to perform))");
                     // int task = validator.isInt(Console.ReadLine());
                     switch (menu)
                 {
                     case 1:
-                      //  user1.moneyPool = execute.purchase(user1.moneyPool);
-                        break;
+
+                            vm.Purchase(3);
+
+
+                            break;
                     case 2:
-                        execute.showAll();
+                        execute.ShowAll();
                         break;
                     case 3:
-                            user1.moneyPool += vendingmachine.insertMoney();
-                            Console.Write(user1.moneyPool);
+                          // vm.InsertMoney();
+                           
 
                             break;
                     case 4:
-                       execute.endTransaction(user1.moneyPool);
-                            Console.Write(user1.moneyPool);
+                            vm.EndTransaction();
+                            
                             Console.Write("\nHere are the options :\n");
                             break;
                     case 5:

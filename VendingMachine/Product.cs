@@ -15,20 +15,19 @@ namespace VendingMachine
     {
         public string name { get; set; }
         public int price { get; set; }
-        public string usageType { get; set; }
-        public void use()
-        {
-            Console.WriteLine($"You {usageType} the {name}.");
-        }
+        public int id { get; set; }
+
+
         public void examine()
         {
             Console.WriteLine($"The {name} costs {price}.");
         }
-        public productList(string name, int price, string usageType)
-        {
+        public productList(int id ,string name, int price)
+        {    
             this.name = name;
             this.price = price;
-            this.usageType = usageType;
+            this.id = id;
+
         }
     }
 }

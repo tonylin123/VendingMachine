@@ -6,16 +6,12 @@ using System.Threading.Tasks;
 
 namespace VendingMachine
 {
-    public class Kex : productList
+    public class Snack : productList
     {
-        public Kex() : base("Kex", 15, "eat")
+        public Snack(int id, string name, int price) : base(id, name, price)
         {
         }
     }
-    public class Olw : productList
-    {
-        public Olw() : base("Lays", 30, "eat")
-        {
-        }
-    }
+
 }
+

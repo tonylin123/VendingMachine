@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace VendingMachine
 {
-    internal interface IVending
+     interface IVending
     {
+       
+        public void ShowAll();
+       // public bool InsertMoney();
+        public string EndTransaction();
+        
+
     }
 }
+  
