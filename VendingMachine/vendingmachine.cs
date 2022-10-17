@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-//2022-10-17
+//2022-10-17.
 namespace VendingMachine
 {
     public class VendingMachine : IVending
