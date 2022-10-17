@@ -24,8 +24,13 @@ namespace VendingMachine
         {
             Products.Add(new Drink("Coke", 15));
             Products.Add(new Drink("Fanta", 14));
+            Products.Add(new Drink("Redbull", 20));
             Products.Add(new Snack("Lays", 27));
             Products.Add(new Snack("Pringles", 27));
+            Products.Add(new Snack("Olw", 25));
+            Products.Add(new Food("Sandwich", 50));
+            Products.Add(new Food("Hamburger", 80));
+            Products.Add(new Food("Bread", 30));
 
 
             for (int i = 0; i < Products.Count; i++)
@@ -83,7 +88,7 @@ namespace VendingMachine
                 Products[i].Examine(Products[i]);
             }
 
-            Console.ReadLine();
+            
         }
 
         public void InsertMoney()
@@ -153,7 +158,7 @@ namespace VendingMachine
                 Console.WriteLine("Quantity: " + item.Value + " Currency: " + item.Key + " KR ");
             }
             Console.WriteLine("\nPress any key to exit.");
-            Console.ReadKey();
+            
             return returnMoney;
         }
 

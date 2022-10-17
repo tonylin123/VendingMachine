@@ -81,7 +81,7 @@ namespace VendingMachine
                     Console.Write(e.Message);
                 }
                 Console.WriteLine("\nAny key return to the menu\n");
-                Console.ReadKey();
+               
 
             }
         }
