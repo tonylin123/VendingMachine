@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-//2022-10-17
+//2022-10-17.
 namespace VendingMachine
 {
     internal class ApplicationManager
