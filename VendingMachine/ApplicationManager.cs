@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+//2022-10-17
 namespace VendingMachine
 {
     internal class ApplicationManager
@@ -36,11 +36,12 @@ namespace VendingMachine
                     switch (menu)
                     {
                         case 1:
-
+                            
+                            
                             if (vendingMachine.MoneyPool != 0)
                             {
+                                vendingMachine.ShowAll();
 
-                                
                                 Console.WriteLine("Enter the product ID to purchase");
                                 var input = Console.ReadLine();
                                 bool inputok = int.TryParse(input, out int id);

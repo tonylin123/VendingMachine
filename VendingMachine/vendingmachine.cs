@@ -83,7 +83,7 @@ namespace VendingMachine
                 Products[i].Examine(Products[i]);
             }
 
-            Console.Read();
+            Console.ReadLine();
         }
 
         public void InsertMoney()
