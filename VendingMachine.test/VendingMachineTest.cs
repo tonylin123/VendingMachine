@@ -1,6 +1,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using VendingMachine;
 using Xunit;
@@ -55,5 +56,21 @@ namespace VendingMachine.test
             // Act
             Assert.Equal("Coke", coke.Name);
         }
-    }
+        [Fact]
+        public void Basketcheck()
+        {
+            vendingmachine.Basket.Add(coke);
+            Assert.True(vendingmachine.Basket != null);
+        }
+        [Fact]
+        public void Returnmoeny()
+        {
+            vendingmachine.MoneyPool = 100;
+
+            vendingmachine.EndTransaction();
+            Assert.Equal(0, vendingmachine.MoneyPool);
+        }
 }
+}
+
+

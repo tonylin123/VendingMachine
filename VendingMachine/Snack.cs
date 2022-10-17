@@ -14,7 +14,7 @@ namespace VendingMachine
 
         public override void Examine(Product product)
         {
-            Console.WriteLine($"{Id} - {product.Name}, {product.Price} SEK,");
+            Console.WriteLine($"{Id} - {product.Name}, {product.Price} KR,");
         }
         public override void Use(Product product)
         {

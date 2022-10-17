@@ -65,8 +65,9 @@ namespace VendingMachine
                             break;
                         case 4:
                             vendingMachine.EndTransaction();
+                            Console.Write("\nThank you for your order.\n");
                             Environment.Exit(0);
-                            Console.Write("\nHere are the options :\n");
+                          
                             break;
 
                         default:
