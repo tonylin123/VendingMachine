@@ -9,97 +9,153 @@ using System.Threading.Tasks;
 
 namespace VendingMachine
 {
-    public class  VendingMachine : IVending
+    public class VendingMachine : IVending
     {
+
         private readonly int[] denominations = { 1, 5, 10, 20, 50, 100, 500, 1000 };
-        
-        public static List<productList> products = new List<productList>()
-        {
-            new Drink(1,"Cola", 11),
-            new Drink(2,"Ice tea", 15),
-            new Snack(3,"Kex", 15),
-            new Snack(4,"Lays", 30),
-          
-            };
-        public int moneyPool { get; set; }
 
-        public void Purchase(int productId)
-        {
+        public int MoneyPool { get; set; }
+        public List<Product> Basket = new List<Product>();
 
-            try
-                {
-               
-                foreach (productList product in products)
+        public List<Product> Products = new List<Product>();
+
+
+        public void Productinventory()
+        {
+            Products.Add(new Drink("Coke", 15));
+            Products.Add(new Drink("Fanta", 14));
+            Products.Add(new Snack("Lays", 27));
+            Products.Add(new Snack("Pringles", 27));
+
+
+            for (int i = 0; i < Products.Count; i++)
             {
-                if (product.id == productId)
-                {  
-                    if (product.price <= moneyPool)
+                Products[i].Id = i + 1;
+            }
+        }
+
+
+
+
+        public void Purchase(int id)
+        {
+
+            if (id > Products.Count)
+            {
+                Console.WriteLine("Not a valid Id");
+            }
+            foreach (var product in Products)
+            {
+                if (product.Id == id)
+                {
+                    if (MoneyPool > product.Price)
                     {
-                        moneyPool = moneyPool - product.price;
-                        
+                        Basket.Add(product);
+                        MoneyPool -= product.Price;
+                        Console.WriteLine($"{product.Name} was added to your baskcet.");
                     }
                     else
                     {
-                        throw new Exception("Not enough money");
-                        }
+                        Console.WriteLine($"This item costs {product.Price} KR, but you have {MoneyPool} KR to spend");
+                        Console.WriteLine("Insert more money or end transaction.");
                     }
                 }
-                }
-
-
-
-            catch (FormatException e)
-            {
-
-                Console.Write(e.Message);
             }
-
         }
+
+        public void ShowBasket()
+        {
+            Console.WriteLine("--------------------");
+            Console.WriteLine("Your current shoppingbasket:");
+            foreach (var product in Basket)
+                Console.WriteLine(product.Name);
+
+            Console.WriteLine();
+        }
+
         public void ShowAll()
         {
             //initalising the products in this method
-           
 
-
-            Console.WriteLine($"{products.Count} products are available;");
-            for (int i = 0; i < products.Count; i++)
+            Console.WriteLine($"{Products.Count} products are available;");
+            for (int i = 0; i < Products.Count; i++)
             {
-                products[i].examine();
+                Products[i].Examine(Products[i]);
             }
-            
+
             Console.Read();
         }
 
-
-        public bool InsertMoney(int money)
+        public void InsertMoney()
         {
-            if (denominations.Contains(money))
+            bool insert = true;
+            while (insert)
             {
-                moneyPool = money + moneyPool;
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        public string EndTransaction()
-        {
-            StringBuilder sb = new StringBuilder();
+                Console.WriteLine("Only accepted currencies are: 1, 5, 10, 20, 50, 100, 500, 1000");
 
-
-            foreach (int coin in denominations)
-            {
-                if (moneyPool / coin > 0)
+                var correct = int.TryParse(Console.ReadLine(), out int Balance);
+                switch (correct)
                 {
-                    sb.Append($"Returning: {moneyPool / coin} * {coin}");
-                }
-                moneyPool %= coin;
-            }
-            return sb.ToString();
+                    case false:
+                        Console.WriteLine("Please insert the correct currency.");
 
+                        break;
+                    case true:
+                        if (!denominations.Contains(Balance))
+                        {
+                            Console.WriteLine("That is not a valid currency");
+                            break;
+                        }
+
+                        MoneyPool += Balance;
+                        Console.WriteLine($"You inserted {Balance}, Balance: {MoneyPool} KR.");
+                        Console.WriteLine("Do you want to insert more? (y/n)");
+                        var answer = Console.ReadLine().ToLower();
+                        switch (answer)
+                        {
+                            case "y":
+                                break;
+                            case "n":
+                                insert = false;
+                                Console.Clear();
+                                break;
+                        }
+                        break;
+                }
+            }
+        }
+        public Dictionary<int, int> EndTransaction()
+        {
+            if (Basket.Count > 0)
+            {
+                Console.WriteLine("The purchased products instruction.");
+            }
+            foreach (var item in Basket)
+                item.Use(item);
+            Console.WriteLine("Here is your money back. " + MoneyPool + " KR ");
+
+
+            Dictionary<int, int> returnMoney = new Dictionary<int, int>();
+            for (int i = denominations.Length - 1; i >= 0; i--)
+            {
+                int change = MoneyPool / denominations[i];
+                if (change != 0)
+                {
+                    returnMoney.Add(denominations[i], change);
+                }
+
+                MoneyPool = MoneyPool % denominations[i];
+            }
+
+
+            foreach (var item in returnMoney)
+            {
+                Console.WriteLine("Quantity: " + item.Value + " Currency: " + item.Key + " KR ");
+            }
+            Console.WriteLine("\nPress any key to exit.");
+            Console.ReadKey();
+            return returnMoney;
         }
 
-        
     }
 }

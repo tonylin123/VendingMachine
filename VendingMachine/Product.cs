@@ -1,33 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace VendingMachine
 {
-    public class userData
+
+
+    public abstract class Product
     {
-        public int moneyPool;
-    }
-
-    public abstract class productList
-    {
-        public string name { get; set; }
-        public int price { get; set; }
-        public int id { get; set; }
 
 
-        public void examine()
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Price { get; set; }
+
+
+
+
+
+        public Product(string name, int price)
         {
-            Console.WriteLine($"The {name} costs {price}.");
-        }
-        public productList(int id ,string name, int price)
-        {    
-            this.name = name;
-            this.price = price;
-            this.id = id;
+            Name = name;
+            Price = price;
+
 
         }
+
+        public abstract void Examine(Product product);
+        public abstract void Use(Product product);
     }
 }
